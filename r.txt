@@ -1,0 +1,569 @@
+x<-2+2
+x
+y<-1:20
+y
+sum(y)
+#### 25 random number from 1 to 100
+z<-sample((1:100),25)
+z
+sum(z)
+length(z)
+#####Sum of 25 random number
+s=0
+for (i in 1:length(z))
+     {s=s+z[i]
+  
+  }
+s
+###sequence 1 to 100 with 2 deference
+p<-seq(1,100,2)
+p
+
+########Sum function#######
+
+sonnetSum<- function(p){
+  s=0
+  for (i in  1:length(p)){
+    s=s+p[i]
+    
+  }
+  return(s)
+}
+sonnetSum(p)
+
+#######Average(mean)#####
+
+SonnetAvg<-function(p){
+  s=0
+  for (i in  1:length(p)){
+    s=s+p[i]
+    
+  } 
+  avg=s/length(p)
+  return(avg)
+}
+SonnetAvg(p)
+
+#####variance####
+
+SonnetVar<-function(p){
+  s=0
+  sx=0
+  for (i in  1:length(p)){
+    s=s+p[i]
+    sx=sx+p[i]^2
+  }
+  var=(1/(length(p)-1))*(sx-s^2/length(p))
+  
+  return(var)
+}
+SonnetVar(p)
+
+var(p)
+
+#######mean + variance####
+
+
+SonnetVar<-function(p){
+  s=0
+  sx=0
+  for (i in  1:length(p)){
+    s=s+p[i]
+    sx=sx+p[i]^2
+  }
+  avg=s/length(p)
+  var=(1/length(p))*(sx-s^2/length(p))
+  meanvar=c(avg,var)
+  return(meanvar)
+}
+SonnetVar(p)
+
+
+#######geometric mean
+#####harmonnic mean
+library("psych")
+k<-seq(1,100,2)
+k
+#####harmonnic mean  
+
+HM<-function(k){
+  s=0
+  for (i in 1:length(k)){
+    s=s+(1/k[i])
+  }
+  hm=length(k)/s
+  return(hm)
+}
+HM(k)
+
+harmonic.mean(k)
+
+#######geometric mean
+GM<-function(k){
+  m=1
+  for (i in 1:length(k)){
+    m=m*k[i]
+  }
+  gm=m^(1/length(k))
+  return(gm)
+}
+GM(k)
+geometric.mean(k)
+
+##Weighted mean
+x<-c(2.75,3,2,3.75,4)
+w<-c(3,2,1,2,3)
+wmean<-function(x,w){
+  ws=0
+  sw=0
+  for (i in 1:length(x)){
+    ws=ws+x[i]*w[i]
+    sw=sw+w[i]
+    
+  }
+  WM=ws/sw
+  return(WM)
+}
+wmean(x,w)
+
+c<-system.time(rnorm(100,0,1))
+c
+D<-system.time(rnorm(90000000,0,1))
+D
+
+
+
+
+####raw moments
+RMoments<-function(k){
+  s=0
+  r=1:4
+  for (i in  1:length(k)){
+    s=s+k[i]^r
+  }
+  rmoment=(1/length(k))*s
+  return(rmoment)
+}
+RMoments(k)
+#####Central Moments
+CMoment2=(RMoments2(k)-RMoments1(k)^2)
+CMoment2
+library(e1071)
+moment(k,order=2,center =TRUE) 
+
+
+
+#########Correlation#######
+#h=height and w = weight
+
+h<-c(5.6,5.8,5.4,5.7,5.10,5.6,5.5,5.6,5.4,5.9)
+w<-c(65,73,58,67,81,66,61,64,62,75)
+
+corr<-function(h,w){
+  Sh=0
+  Sw=0
+  Shh=0
+  Sww=0
+  Shw=0
+  for (i in 1:length(h)){
+    Sh=Sh+h[i]
+    Sw=Sw+w[i]
+    Shh=Shh+h[i]^2
+    Sww=Sww+w[i]^2
+    Shw=Shw+h[i]*w[i]
+    
+  }
+  r=(Shw-((Sh*Sw)/length(h)))/((Shh-((Sh^2)/length(h)))*(Sww-((Sw^2)/length(w))))^(1/2)
+  return(r)
+} 
+corr(h,w)
+
+cor(h,w)
+
+#####covariance simple
+
+covariance<-function(x,y){
+  sx=0
+  sy=0
+  sxy=0
+  for(i in 1:length(x)){
+    sx=sx+x[i]
+    sy=sy+y[i]
+    sxy=sxy+x[i]*y[i]
+  }
+  covv=(1/(length(x)-1))*(sxy-(sx*sy/length(x)))
+  return(covv)
+}
+covariance(x,y)
+cov(x,y)
+-----------------------------------------
+
+k<-rnorm(1000,0,1)
+####Raw Moments###0######
+#####1st Rmoment
+RMoments1<-function(k){
+s=0
+for (i in  1:length(k)){
+s=s+k[i]
+}
+rmoment1=(1/length(k))*s
+return(rmoment1)
+}
+RMoments1(k)
+
+
+####2nd raw moment
+RMoments2<-function(k){
+s=0
+for (i in  1:length(k)){
+s=s+k[i]^2
+}
+rmoment2=(1/length(k))*s
+return(rmoment2)
+}
+RMoments2(k)
+
+####3nd raw moment
+RMoments3<-function(k){
+s=0
+for (i in  1:length(k)){
+s=s+k[i]^3
+}
+rmoment3=(1/length(k))*s
+return(rmoment3)
+}
+RMoments3(k)
+####4nd raw moment
+RMoments4<-function(k){
+s=0
+for (i in  1:length(k)){
+s=s+k[i]^4
+}
+rmoment4=(1/length(k))*s
+return(rmoment4)
+}
+RMoments4(k)
+
+#####Central Moments
+CMoment2=(RMoments2(k)-RMoments1(k)^2)
+CMoment2
+
+CMoment3=RMoments3(k)-3*RMoments2(k)*RMoments1(k)+2*RMoments1(k)^3
+CMoment3
+
+CMoment4=RMoments4(k)-4*RMoments3(k)*RMoments1(k)+6*RMoments2(k)*RMoments1(k)^2-3*RMoments1(k)^4
+CMoment4
+
+  
+library(e1071)
+moment(k, order=2, center=TRUE)
+moment(k, order=3, center=TRUE)
+moment(k, order=4, center=TRUE)
+
+####Beta
+###
+beta1=(CMoment3^2/CMoment2^3)
+beta1
+###skewness
+c<-sqrt(beta1)
+c
+###kurtosis
+beta2=(CMoment4/CMoment2^2)
+beta2
+
+'''''''''''''''''''''''''
+######stem-leaf plot
+stem(x)
+####Box Plot
+y<-c(10,20,24,34,10)
+boxplot(x)
+#####Max
+max(x)
+min(x)
+y
+y[10]<-90
+y[34]<-35
+y
+round(x,0)
+boxplot(x)
+##IQR
+
+###covairnce
+y<-rnorm(50,50,9)
+covarianceFunction = function(x,y){
+  sx = 0
+  sy = 0
+  for (i in 1:length(x)) {
+    sx = x[i]+sx
+    sy = y[i] +sy
+  }
+  avx = sx/length(x)
+  avy = sy/length(y)
+  
+  sxy = 0
+  for (i in 1:length(x)) {
+    sxy = ((x[i]-avx)*(y[i]-avy)) + sxy
+  }
+  coVariance = sxy/(length(x)-1)
+  return(coVariance)
+}
+cov(x,y)
+covarianceFunction(x,y)
+
+#####covariance simple
+
+covariance<-function(x,y){
+  sx=0
+  sy=0
+  sxy=0
+  for(i in 1:length(x)){
+    sx=sx+x[i]
+    sy=sy+y[i]
+    sxy=sxy+x[i]*y[i]
+  }
+  covv=(1/(length(x)-1))*(sxy-(sx*sy/length(x)))
+  return(covv)
+}
+covariance(x,y) 
+cov(x,y)
+----------------------------------------
+
+############################################
+###              Factor                  ###
+############################################                             
+factor(x=c("Small","Large","Large","Regular","Small"),
+       levels=c("Small","Regular","Large"),
+       ordered=TRUE)
+
+sex.char <- c("female","female","female","male","female","male","male",
+              "female")
+x<-factor(sex.char)
+x
+
+sex.num <- c(0,0,0,1,0,1,1,0)
+
+x1<-factor(sex.num)
+x1
+
+
+############################################
+###      Matrix and Data Frame           ###
+############################################
+
+dVec<-1:20
+cVec<-dVec
+dim(dVec)
+length(dVec)
+dim(cVec)<-c(4,5)
+dat<-matrix(dVec, nrow=4)
+patients <- c("Arafat", "Arpita", "Jahid", "Sonnet")
+cbind(patients, dat)
+data.frame(patients, dat)
+dfDat<-data.frame(patients, dat)
+dfDat
+rownames(dfDat)<-dfDat[,1]
+rownames(dfDat)
+View(dfDat)
+
+
+##########  Matrix and Arrays   ###############
+
+##book chapter 3
+
+
+
+
+
+
+
+
+
+###############  Grade Point and Letter Grade    ####################
+
+s<-c(87,45,72,65,45,53)
+
+grade <- function (s) {
+  n =length(s)
+  gp =matrix(0, nrow = n, ncol = 1)   # gp means Grade Point
+  lg= matrix(0, nrow = n, ncol = 1)    # lg means Letter Grade
+  for (i in 1:n) {
+    if (s[i] < 40){
+      gp[i] = 0.00;  lg[i]= "F"
+    }
+    else if (s[i] >= 40 && s[i] < 45){
+      gp[i] = 2.00; lg[i] = "D"
+    }
+    else if (s[i] >= 45 && s[i] < 50){
+      gp[i] = 2.25; lg[i] = "C"
+    }
+    else if (s[i] >= 50 && s[i] < 55){
+      gp[i] = 2.50; lg[i] = "C+"
+    }
+    else if (s[i] >= 55 && s[i] < 60){
+      gp[i] = 2.75; lg[i] = "B-"
+    }
+    else if (s[i] >= 60 && s[i] < 65){
+      gp[i] = 3.00; lg[i] = "B"
+    }
+    else if (s[i] >= 65 && s[i] < 70){
+      gp[i] = 3.25; lg[i] = "B+"
+    }
+    else if (s[i] >= 70 && s[i] < 75){
+      gp[i] = 3.50; lg[i] = "A-"
+    }
+    else if (s[i] >= 75 && s[i] < 80){
+      gp[i] = 3.75; lg[i] = "A"
+    }
+    else{
+      gp[i] = 4.00; lg[i] = "A+"
+    }
+  }                                         
+  return(list(Grade.Point = gp,  Letter.Grade = lg))
+}  
+grade(s)
+---------------------------------------------------
+
+x<-matrix(1:25,nrow=5,ncol=5)
+x
+apply(x,1,mean)
+
+x[2,]
+sum(x[2,])
+
+
+Y<-c(6,5,6,15,7)
+x<-c(1,1,1,1,1)
+x1<-c(50,30,55,100,50)
+x2<-c(8,8,5,5,10)
+x3<-c(4,5,4,4,11)
+
+y<-matrix(Y)
+colnames(y)[1]="y"
+y
+X<-cbind(x,x1,x2,x3)
+X
+###transpose
+Xt<-t(X)
+Xt
+###multiplying transpose and matrix
+
+Xtx<-Xt%*%X
+Xtx
+## inverse matrix( multiplied transpose and matrix)
+
+inv_mx<-solve(Xtx)
+inv_mx
+
+XtY<-Xt%*%y
+XtY
+#### Beta calculation
+Beta<-inv_mx%*%XtY
+Beta
+
+k<-c(2,4,3,3,5,2,7,6,1,4,3,7)
+dim(k)<-c(4,3)
+mx<-matrix(k,nrow=4,byrow = TRUE)
+mx
+mx[4,3]<-17
+mx
+y<-c(12,7,15)
+y
+Y<-matrix(y)
+Y
+##random element replace in matrix
+rd<-sample(1:12,1)
+rd
+mx[rd]=NA ### rd sample postion replace
+mx
+rd<-sample(1:12,3)
+rd
+mx[rd]=99 ### rd sample postion replace
+mx
+### element replace which greater than 5 with 99
+mx[mx>5]=99
+mx
+mx[1,3]=4
+mx
+### repalcing with loop(alternative)
+for(i in 1:nrow(mx)){
+  for(j in 1:ncol(mx)){
+    if(mx[i,j]>5)
+      mx[i,j]=99 
+    else mx[i,j]= mx[i,j]
+        }
+}
+
+###transpose
+Xt<-t(mx)
+Xt
+###multiplying transpose and matrix
+
+Xtx<-Xt%*%mx
+Xtx
+
+XtY<-Xt%*%Y
+XtY
+## inverse matrix( multiplied transpose and matrix)
+
+inv_mx<-solve(Xtx)
+inv_mx
+
+#### Beta calculation
+Beta<-inv_mx%*%XtY
+Beta
+
+
+
+###### Array#############
+
+ar<-array(data=1:24,dim=c(3,4,2))
+ar
+
+### with random number
+
+x<-round(rnorm(24,5,2),0)
+x
+AR<-array(data=x,dim=c(3,4,2))
+AR
+######extraction
+p<-AR[2,3,2]
+p
+q<-AR[,c(2,3),2]
+q
+c<-AR[c(1,3),c(2,4),]
+c
+##### repalce
+AR[2,4,2]=99
+AR
+getwd()
+
+
+
+
+
+###change location
+setwd()
+
+#######data export and import
+m<-read.csv("C:\\Users\\SONNET PODDER\\OneDrive - bsmrstu.edu.bd\\Desktop\\Project Data Dhaka.csv")
+m
+d<-read.table(file ="C:\\Users\\SONNET PODDER\\OneDrive - bsmrstu.edu.bd\\Desktop\\Project Data Dhaka.csv",header =TRUE,sep ="," )
+d
+str(d)
+heatmap(as.matrix(d))
+
+#####plotting
+
+data(iris)
+
+View(iris)
+str(iris)
+x=Petal.Length
+y=Petal.Width
+z=Species
+range(x)
+range(y)
+plot(x)
+plot(x,type = "b",col="red")
+
+

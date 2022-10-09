@@ -1,0 +1,678 @@
+#simple Bar plot
+
+  
+Gopalganj<-20
+Sitakunda<-35
+Sylhet<-40
+
+Data<-cbind(Gopalganj,Sitakunda,Sylhet)
+barplot(Data,horiz = FALSE,main ="Number of Spots",names.arg =c("Gopalganj","Sitakunda","Sylhet") )
+
+r<-c(5,12,15)
+fdata<-rbind(Data,r)
+rownames(fdata)<-c("T.Spot","River")
+barplot(fdata,horiz = F,main ="No. of Spots",xlab="Number of Tourist Spot",col=c(1,8),legend=rownames(fdata))
+
+
+###histogram
+x<-rnorm(50,1,10)
+hist(x) # Sturges rule
+hist(x,breaks = 5)
+hist(x,breaks = 15)
+hist(x,prob=T)
+hist(density(x))
+
+#####pie chart
+pie(Data,labels = colnames(fdata),main = "Percentages of Vote",col =c("green", "blue", "red"))
+
+
+pie(Data, labels = paste(fdata, "%"),col =c("green", "blue", "red"),main ="Parcentage of votes",radius = .7)
+
+legend("topright", legend = c('Gopalganj','Sitakunda','Sylhet'),fill =c("green", "blue", "red"))
+
+
+-------------------------------------------
+data(iris)
+attach(iris)
+str(iris)
+x=Petal.Length
+y=Petal.Width
+z=Species
+range(x)
+range(y)
+plot(x)
+plot(x, type = "o")
+plot(x, type = "h")
+plot(x, type = "n")
+plot(x, type = "s")
+plot(x, type = "l")
+
+
+#adding titles
+plot(y, type = "l", main = "Petal Length",sub="line plot", xlab="",ylab="value")
+plot(x, type = "l", main = "line plot", xlab="",ylab="value", ylim=c(0,7))
+lines(y,lty=2)#adding line to plot
+legend(0,7,c("Petal Length","Petal Width"),lty =c(1,2))
+hist(x) # Sturges rule
+hist(x,breaks = 5)
+hist(x,breaks = 15)
+boxplot(x)
+boxplot(y)
+xy=cbind(x,y)
+boxplot(xy)#box plot of matrix
+boxplot(Petal.Length ~ Species, horizontal=T,col="red", xlab="Petal length",ylab="Species", main="Grouped box plot")
+qqnorm(x)
+d <- density(x)
+plot(d,main="Kernel Density Estimate of x")
+
+
+#box()#adds a box around the current plot
+#Multiple plots in one page
+par(mfrow=c(2,2)) 
+hist(x)
+hist(y) 
+boxplot(x) 
+boxplot(y)
+#2-dimentional plot
+plot(x, y) #Scatter Plot
+#Differentiating observations by categorical variable
+plot(Petal.Length, Petal.Width, pch=20, cex=1.2,xlab="Petal length", ylab="Petal width", main="Anderson Iris data", col=c("slateblue","firebrick","darkolivegreen")[as.numeric(Species)])
+text(1, 2.4, "Three species of Iris", pos=4, col="navyblue")
+legend(1, 2.4, levels(Species), pch=20, bty="n",col=c("slateblue", "firebrick","darkolivegreen"))
+points(mean(Petal.Length), mean(Petal.Width),cex=2, pch=23, col="black", bg="red")
+points(median(Petal.Length), median(Petal.Width),cex=4, pch=23, col="black", bg="blue")
+abline(v=mean(Petal.Length), lty=2, col="red")
+abline(h=mean(Petal.Width), lty=2, col="red")
+abline(v=median(Petal.Length), lty=2, col="blue")
+abline(h=median(Petal.Width), lty=2, col="blue")
+coplot(Petal.Width ~ Petal.Length |Species, col=as.numeric(Species),pch=as.numeric(Species))
+pairs(iris[,1:4])
+pairs(iris[,1:4], col=as.numeric(Species),main="Pairwise scatterplot")
+getir()
+getDir()
+
+
+#Saving Plots
+png("myplot.png")
+plot(x,y)
+dev.off()#closing plot
+pdf("myplot.pdf",paper="letter",width=8,height=10.5)
+par(mfrow=c(2,1))
+plot(x,y,main="First Graph (on top)")
+plot(x,z,main="Second Graph (on bottom)")
+dev.off()
+#Contour Plot
+library(ks)
+est=kde(xy, gridsize = c(150,150))
+x1=est$eval.points[[1]]
+x2=est$eval.points[[2]]
+p=est$estimate
+plot(x,y)
+contour(x=x1,y=x2,z=p,add=TRUE)
+
+-------------------------------------------
+##Scatter plot
+
+data("iris")
+View(iris)
+plot(iris[,1],iris[,2])
+hist(iris[,1])
+lines(density(iris[,1]))
+plot(density(iris[,1]))
+
+### graphically normality check
+qqnorm(iris[,1])
+qqline(iris[,1])
+
+#####qq plot for huge data
+z<-rt(100,df=3) ### follw normal only for huge data
+qqnorm(z)
+qqline(z)
+###
+z<-rnorm(10000000) ### follw normal only for huge data
+qqnorm(z)
+qqline(z)
+
+########################my code
+####data
+x<-rnorm(50,0,8)
+y<-rnorm(60,1,5)
+
+
+##check normality
+data(iris)
+hist(iris[,1])
+hist(iris[,1],prob=TRUE)
+lines((density(iris[,2])))
+
+
+qqnorm(iris[,1])
+qqline(iris[,1])
+
+
+c<-rt(100000,3)
+qqnorm(c)
+qqline(c)
+
+
+####multiple figure
+Temperature<-airquality$Temp ### data from r
+Ozone<-airquality$Ozone  ### data from r
+
+par(mfrow=c(2,2))###multiple partition of figure page
+hist(Temperature)
+boxplot(Temperature,horizontal = TRUE)
+hist(Ozone)
+
+
+####saving high quality plot(not for xm)
+tiff(file="myphoto.tif",width = 1080,height = 720,units = "px",pointsize = 12)
+getwd()
+#####scatter plot
+
+scatter.smooth(rnorm(200,0,5))
+----------------------------------------------------------------
+
+
+
+######Probability Distribution
+
+###dbinom(x,n,p)
+dbinom(2,10,.5)
+pbinom(2,10,.5)
+1-pbinom(1,10,.5)
+
+#####Binomial problem
+#n=20     p=1/6       Find P(X=3),[P(X=0) & P(X=1) &...& P(X=3)],(X <=3),P(X < 3)
+
+##Solution
+#P(X=3)
+dbinom(x=3, size=20, prob=1/6)
+
+#[P(X=0) & P(X=1) &...& P(X=3)]
+#(X <=3)
+pbinom(q=3, size=20, prob=1/6, lower.tail=T)
+
+dbinom(x=0:3, size=20, prob=1/6)
+sum(dbinom(x=0:3, size=20, prob=1/6))##Alternative 
+
+#P(X < 3)
+pbinom(q=3, size=20, prob=1/6, lower.tail=FALSE)
+
+###Poison Problem
+#lambda=5      Find P(X=4),[P(X=0) & P(X=1) &...& P(X=4)],
+##Solution
+#P(X=4)
+dpois(x=4, lambda=5)
+
+
+
+#P(X <= 4)
+ppois(q=4, lambda=5, lower.tail=T)
+
+####
+#[P(X=0) & P(X=1) &...& P(X=4)]
+dpois(x=0:4, lambda=5)
+sum(dpois(x=0:4, lambda=5)) ##Alternative
+
+ ## P(X>=12)
+W<-(1-ppois(q=11,lambda=5))
+W
+sum(dpois(12:20,lambda = 5))
+
+
+####Normal dist problem
+?Normal
+
+#P(X>12)
+pg12<-(1-pnorm(12,10,0.8))
+
+## 8 to 12
+
+pg22<-pnorm(12,10,0.8)-pnorm(8,10,0.8)
+
+
+
+
+
+
+
+####sampling distribution 
+
+
+###Parametric test
+
+----------------------------------------------------
+x <- seq(-5, 5, 0.1)
+x
+y <- dnorm(x, mean=0, sd=0)
+y
+qnorm(0.975)      # z_{0.25} = 1.96
+pnorm(1.96, 0, 1)  # P(X < 2) = 0.975
+z  <- rnorm(1000, mean=0, sd=1)
+z
+mean(z)      
+sd(z)
+
+###################################
+###  normality Check           ####
+###################################
+
+#Graphical procedures (7)
+par(mfrow=c(2,2))                # 2 x 2 pictures on one plot
+x= rnorm(100,0,1)
+qqnorm(x,main='normal(0,1)')
+qqline(x)
+x= rnorm(100,10,15)
+qqnorm(x,main='normal(10,15)')
+qqline(x)
+x= rexp(100,1/10)
+qqnorm(x,main='exponential mu=10')
+qqline(x)
+x= runif(100,0,1)
+qqnorm(x,main='unif(0,1)')
+qqline(x)
+
+
+##################################################################
+# In a course 20% students got A grade. 5 students are          ##
+# randomly selected from this group of students. Find the       ##
+# probability that out of 5 students (i) 2 students got A,      ##
+# (ii) at least one student got A (iii) at best 1 student got A ##
+##################################################################
+
+#i#
+p<-dbinom(2,size=5,prob=0.2)
+
+#ii##
+p1<-1-pbinom(0,size=5,prob=0.2)
+x<-c(1:5)
+p11<-sum(dbinom(x,size=5,prob=0.2))
+
+#iii##
+
+p2<-pbinom(1,size=5,prob=0.2)
+
+
+
+
+##########################################################################
+##In a telephone exchange 5 wrong calls are received out of 100 calls   ##
+##In an hour 250 calls are received. Find the probability that, in that ##
+##hour (i)there are 2 wrong calls, (ii)there are at least 3 wrong calls,## 
+##(iii) there are at best 3 wrong calls.                                ##
+##########################################################################
+
+#i#
+
+lambda<-250*5/100
+p12<-dpois(2,lambda)
+
+#ii##
+p22<-1-ppois(2,lambda)
+x<-c(3:250)
+p221<-sum(dpois(x,lambda))
+#iii##
+
+p23<-ppois(3,lambda)
+
+
+##################################################################################
+##The loaf volume of a bakery follows normal distribution with mean =10 cft     ##
+##and standard deviation 0.8 c.f.t Find the probability that a randomly selected##
+##loaf has the volume (i) more than 12 cft (ii) 8 to 12 cft.                    ##
+##################################################################################
+
+##1##
+pg12<-1-pnorm(12,10,0.8)
+
+#ii#
+p8t12<-pnorm(12,10,0.8)-pnorm(7,10,0.8)
+
+
+#########################
+
+######################################################
+# Children's IQ scores are normally distributed with a
+# mean of 100 and a standard deviation of 15. What
+# proportion of children are expected to have an IQ between
+# 80 and 120?
+
+
+mean=100; sd=15
+lb=80; ub=120
+x <- seq(-4,4,length=100)*sd + mean
+hx <- dnorm(x,mean,sd)
+plot(x, hx, type="n", xlab="IQ Values", ylab="",
+  main="Normal Distribution", axes=FALSE)
+i <- x >= lb & x <= ub
+lines(x, hx)
+polygon(c(lb,x[i],ub), c(0,hx[i],0), col="red")
+area <- pnorm(ub, mean, sd) - pnorm(lb, mean, sd)
+result <- paste("P(",lb,"< IQ <",ub,") =",
+   signif(area, digits=3))
+mtext(result,3)
+axis(1, at=seq(40, 160, 20), pos=0) 
+##########################################################
+# Display the Student's t distributions with various
+# degrees of freedom and compare to the normal distribution
+############################################################
+x <- seq(-4, 4, length=100)
+hx <- dnorm(x)
+degf <- c(1, 3, 8, 30)
+colors <- c("red", "blue", "darkgreen", "gold", "black")
+labels <- c("df=1", "df=3", "df=8", "df=30", "normal")
+plot(x, hx, type="l", lty=2, xlab="x value",
+  ylab="Density", main="Comparison of t Distributions")
+for (i in 1:4){
+  lines(x, dt(x,degf[i]), lwd=2, col=colors[i])
+}
+legend("topright", inset=.05, title="Distributions",
+  labels, lwd=2, lty=c(1, 1, 1, 1, 2), col=colors)
+
+###########################################################
+###  Parametric Test
+###########################################################
+
+# one sample t-test #
+
+
+snacks <- c(87.7,80.01,77.28,78.76,81.52,74.2,80.71,79.5,77.87,81.94,80.7,
+82.32,75.78,80.19,83.91,79.4,77.52,77.62,81.4,74.89,82.95,
+73.59,77.92,77.18,79.83,81.23,79.28,78.44,79.01,80.47,76.23,
+78.89,77.14,69.94,78.54,79.7,82.45,77.29,75.52,77.21,75.99,
+81.94,80.41,77.7)
+ #### Test: mu=80 ###
+length(snacks)
+
+
+n <- length(snacks)
+
+snack.mean <- mean(snacks)
+snack.sd <- sd(snacks)
+snack.se <- snack.sd/sqrt(n)
+snack.T <- (snack.mean-80)/snack.se
+snack.T
+pt(snack.T,df=n-1)
+
+
+##########################3#######################333333
+t.test(x=snacks,mu=80,alternative="less")
+
+
+
+#two sample t-test ##
+
+snacks2 <- c(80.22,79.73,81.1,78.76,82.03,81.66,80.97,81.32,80.12,78.98,
+79.21,81.48,79.86,81.06,77.96,80.73,80.34,80.01,81.82,79.3,
+79.08,79.47,78.98,80.87,82.24,77.22,80.03,79.2,80.95,79.17,81)
+
+snack2.mean <- mean(snacks2)
+snack2.sd <- sd(snacks2)
+
+t.test(x=snacks2,y=snacks,alternative="two.sided",conf.level=0.9)
+
+
+##check Manually
+
+
+######################################################
+####Chi Square
+######################################################
+
+M <- as.table(rbind(c(762, 327, 468), c(484, 239, 477)))
+dimnames(M) <- list(gender = c("F", "M"),
+                    party = c("Democrat","Independent", "Republican"))
+
+
+
+Xsq <- chisq.test(M)
+
+Xsq$observed   # observed counts (same as M)
+Xsq$expected   # expected counts under the null
+
+######################################################
+#### F Test
+######################################################
+
+
+A = c(16, 17, 25, 26, 32, 34, 38, 40, 42)
+B = c(600, 590, 590, 630, 610, 630)
+# var test in R
+var.test(A, B, alternative = "two.sided")
+
+
+
+#################################################
+data <- data.frame(values=c(18, 19, 22, 25, 27, 28, 41, 45, 51, 55,
+                            14, 15, 15, 17, 18, 22, 25, 25, 27, 34),
+                   group=rep(c('A', 'B'), each=10))
+
+
+var.test(values~group, data=data)
+
+
+#########################################################
+### Wilcoxon Test
+#########################################################
+
+women_weight <- c(38.9, 61.2, 73.3, 21.8, 63.4, 64.6, 48.4, 48.8, 48.5)
+men_weight <- c(67.8, 60, 63.4, 76, 89.4, 73.3, 67.3, 61.3, 62.4) 
+# Create a data frame
+my_data <- data.frame(group = rep(c("Woman", "Man"), each = 9),
+                weight = c(women_weight,  men_weight))
+
+
+library(dplyr)
+group_by(my_data, group) %>%
+  summarise(
+    count = n(),
+    median = median(weight, na.rm = TRUE),
+    IQR = IQR(weight, na.rm = TRUE)
+  )
+boxplot(my_data$weight~my_data$group)
+
+boxplot(my_data$weight~my_data$group, col=c(2,3))
+
+wilcox.test(weight ~ group, data = my_data, 
+        exact = FALSE, alternative = "less")
+
+
+wilcox.test(weight ~ group, data = my_data,
+        exact = FALSE, alternative = "greater")
+
+###########################################################
+####    Fitting Univariate Distribution                ####
+###########################################################
+
+x.norm<-rnorm(n=200,m=10,sd=2)
+hist(x.norm,main="Histogram of observed data")
+
+plot(density(x.norm),main="Density estimate of data")
+plot(ecdf(x.norm),main="Empirical cumulative distribution function")
+
+z.norm<-(x.norm-mean(x.norm))/sd(x.norm) 
+qqnorm(z.norm) 
+abline(0,1) 
+
+##############################################
+
+x.wei<-rweibull(n=200,shape=2.1,scale=1.1) 
+hist(x.wei)
+## sampling from a Weibull distribution with parameters shape=2.1 and scale=1.1
+
+x.teo<-rweibull(n=200,shape=2, scale=1) 
+## theorical quantiles from a Weibull population with known paramters shape=2 e scale=1
+
+qqplot(x.teo,x.wei,main="QQ-plot distr. Weibull") ## QQ-plot
+abline(0,1) ## a 45-degree reference line is plotted
+
+
+
+#######################################
+x.poi<-rpois(n=200,lambda=2.5)
+hist(x.poi,main="Poisson distribution")
+
+#######################################
+
+
+-----------------------------------------
+
+########Regression######
+#Correlation #### check the linearity of the variables and comment
+x<-rpois(2000,5)
+y<-4+5*x+rnorm(2000,00,1)
+y1<-4+5*x
+plot(x,y)
+plot(x,y1)
+cor(x,y)
+cor(x,y1)
+
+data(trees)
+trees
+
+###Correlation test small data
+cor.test(x,y,method = "kendall",alternative = "greater")
+cor.test(x,y,method = "kendall",alternative = "greater",exact = F)
+
+##using large sample aproximation
+
+cor.test(x,y,method = "spearman",alternative = "greater",exact = TRUE)
+cor.test(x,y,method = "spearman",alternative = "greater",exact = F)
+
+
+###Correlation test with significeance levels
+
+library(Hmise)  #####problem
+rcor(as.matrix(trees))
+
+
+####regression 
+
+
+
+
+
+
+####regression Diagnostic 
+###Cook distance(out liar)
+data(hbk)
+View(hbk)
+
+fit1<-lm(Y~X1+X2+X3,data=hbk)
+fit1
+fit2<-lm(Y~.,hbk)#alternative
+fit2
+summary(fit1)
+cd<-cooks.distance(fit1)
+cd
+plot(cd)
+m3<-3*mean(cd)
+m3
+abline(h=m3,col=2)
+
+####pearson residual and outlire detection 
+
+rsid<-residuals(fit2,type = "pearson")
+rsid
+plot(rsid,col = rgb(0.5,0.1,0.1, alpha = 1))
+
+abline(h=c(-3,3))
+obs<-which(rsid>3|rsid<(-3))
+obs
+text(obs,rsid[obs],labels=obs,cex=1,pos=2,col =2 )
+
+####GLM######
+###logistic regression####
+data(iris)
+View(iris)
+iris
+iris1<-iris[1:98,]
+dim(iris1)
+str(iris1)
+logis_reg<-glm(Species~Sepal.Length+Sepal.Width+Petal.Length +Petal.Width ,data = iris1,family = "binom")
+logis_reg
+summary(logis_reg)
+###predict data
+pdata<-iris[c(1,2,3,4,5,75,76,77,78,79),]
+pdata
+
+predct_reg<-predict(logis_reg,pdata,type = "response")
+predct_reg
+
+####Odered logistic regression
+library(MASS)
+View(housing)
+
+house.plr<-polr(Sat~.,weights = Freq,data = housing)
+house.plr
+predict_reg<-predict(house.plr,housing[1:10,],type="p")
+predict_reg
+
+
+###Multinomial logistic reg
+library("nnet")
+mlog<-multinom(Sat~.,data = housing)
+predict_reg<-predict(mlog,housing[1:10,])
+predict_reg
+---------------------------------------------------------
+
+			##############################
+			#####	 ANOVA&&& ANCOVA	######
+			##############################
+
+
+##############################
+#####		CRD		######
+##############################
+treat<-rep(c("A","B","C","D"),each=4)
+fact<-factor(rep(c(.25,.5,.75,1),each=4))
+treat
+height<-c(1.4,2.0,2.3,2.5,7.8,9.2,6.8,6.0,7.6,7,7.3,5.5,1.6,3.4,3.0,3.9)
+exp<-data.frame(treat,treatment=fact,response=height)
+mod<-aov(response~treatment,data = exp)
+summary(mod)
+
+########################################
+####			RBD			####
+########################################
+corn<-factor(rep(c("corn","rice","wheat"),each=3))
+fert<-factor(rep(c("f1","f2","nf"),times=3))
+corn
+fert
+y=c(6,5,6,4,4.2,5,5,4.4,5.5)
+results=data.frame(y,corn,fert)
+fit=aov(y~fert+corn,data=results)
+summary(fit)
+
+
+
+############################
+####		ANCOVA	####
+############################
+
+input=mtcars[,c("am","mpg","hp")]
+print(head(input))
+input=(mtcars)
+
+
+###################################################
+###    MODEL with and without interartion       ###
+###	& predect variables & 				###
+###	creat the regession model			###
+###################################################
+
+result=aov(mpg~hp+am,data=input)
+print(summary(result))
+
+
+#########################
+### Compair two model ###
+#########################
+result1=aov(mpg~hp*am,data=input)
+result2=aov(mpg~hp+am,data=input)
+print(anova(result1,result2))
+
+
+
+
